@@ -13,3 +13,24 @@ a{
   color: $dark;
   font-size: .9rem;
 }
+
+.card {
+  .question-wrapper{
+    height: 150px;
+    display: grid;
+    place-items: center;
+  }
+  .pill{
+    background-color: $secondary;
+    color: $primary;
+    padding: 4px 16px;
+    font-size: 12px;
+    border-radius: 14px;
+
+  }
+
+  .question-link:hover{
+    transition: all 400ms;
+    color: $primary;
+  }
+}

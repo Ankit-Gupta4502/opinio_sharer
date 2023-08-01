@@ -1,12 +1,12 @@
 import React, { SetStateAction, useState,useEffect } from 'react'
 import { Container, Button } from 'reactstrap'
-import Image from 'next/image'
+import {FaUserCircle} from "react-icons/fa"
 import useBoundStore from '@/zustand'
 import { signOut } from 'firebase/auth'
 import { auth } from '@/firebase'
 const Header = ({ setIsopen }: { setIsopen: React.Dispatch<SetStateAction<boolean>> }) => {
   const [showSignOut,setShowSignOut] = useState(false)
-  const isAuthenticated = useBoundStore(state => state.isAuthenticated)
+  const {isAuthenticated,name} = useBoundStore(state => ({isAuthenticated:state.isAuthenticated,name:state.auth.name}))
   const signOutFromStore = useBoundStore(state => state.signOut)
   const signOutUser = () => {
     signOut(auth)
@@ -24,9 +24,10 @@ const Header = ({ setIsopen }: { setIsopen: React.Dispatch<SetStateAction<boolea
         <div className="d-flex justify-content-between align-items-center ">
           <h3 className=' fw-bold mb-0' >Logo</h3>
           <div className="d-flex gap-4 align-items-center">
-            <div className="d-flex align-items-center gap-3">
-
-            </div>
+           {showSignOut&& <div className="d-flex align-items-center gap-3">
+              <FaUserCircle size={28}  />
+               <span>{name}</span>
+            </div>}
             {!showSignOut ? <Button color='secondary' onClick={() => setIsopen(true)} >Sign in </Button> : <Button color='secondary' onClick={signOutUser} >Sign out </Button>}
           </div>
         </div>
