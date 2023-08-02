@@ -21,7 +21,7 @@ const QuestionDetail = ({ data }: InferGetServerSidePropsType<typeof getServerSi
             "local_time": new Date().getTime().toString(),
             "pin_code": null
         }
-        axios.post(`https://api.trenddii.com/vote`, answer, {
+        axios.post(`/api/vote`, answer, {
             headers: {
                 Authorization: `Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTY5MDg2NTgyOCwianRpIjoiYjM1ZTA0OWMtZTdiNi00YThmLWIwNmUtNjA1ZjUxYTBiODUxIiwibmJmIjoxNjkwODY1ODI4LCJ0eXBlIjoiYWNjZXNzIiwic3ViIjp7ImlkIjoiNjRjODkwYTQ4M2NmNmM3ZGU4ZGQzMWVmIn19.ZEdRjp5o_UUFhJOBfY2hc7rfCoULDCTrFmhq7cAQUzc`
             }

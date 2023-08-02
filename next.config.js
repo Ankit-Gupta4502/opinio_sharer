@@ -10,6 +10,15 @@ const nextConfig = {
     appId: "1:71026453757:web:5b6110aa370251f795a294",
     measurementId: "G-ZTZ724BX48"
   },
+
+async rewrites(){
+  return [
+    {
+      source:"/api/:path*",
+      destination:"https://api.trenddii.com/:path*"
+    }
+  ]
+}
   
 }
 
