@@ -5,7 +5,11 @@ import { FiEye } from "react-icons/fi"
 import { BiUpvote } from "react-icons/bi"
 import { AiOutlineShareAlt } from "react-icons/ai"
 import Link from 'next/link'
+import ReactShare from "@/Components/ReactShare/SocialSharer"
+import { useState } from 'react'
 export default function Home({ data }: InferGetServerSidePropsType<typeof getServerSideProps>) {
+  const [isOpen, setIsOpen] = useState(false)
+  const [link, setLink] = useState("")
   return (
     <>
       <Head>
@@ -17,6 +21,7 @@ export default function Home({ data }: InferGetServerSidePropsType<typeof getSer
       <main className='py-4' >
         <div className="container">
           <div className="bg-light p-3">
+
             <div className="row gy-4">
               {
                 data.map((item) => {
@@ -28,8 +33,11 @@ export default function Home({ data }: InferGetServerSidePropsType<typeof getSer
                             <span className='pill' >
                               {item.topic_title}
                             </span>
-                            <span>
-                              <AiOutlineShareAlt size={24} role="button" />
+                            <span role="button" onClick={() => {
+                              setIsOpen(true)
+                              setLink(item.dynamic_link.question)
+                            }}>
+                              <AiOutlineShareAlt size={24} />
                             </span>
                           </div>
                           <Link className='question-link' href={`/${item.question_slug}?question-id=${item.question_id}`} >
@@ -64,7 +72,7 @@ export default function Home({ data }: InferGetServerSidePropsType<typeof getSer
 
           </div>
         </div>
-
+        <ReactShare isOpen={isOpen} setIsOpen={setIsOpen} link={link} />
       </main>
     </>
   )
